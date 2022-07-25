@@ -3,8 +3,6 @@ import SurahCard from "../components/Home/SurahCard";
 import Link from "next/link";
 
 export default function Home({ allSurahRes }) {
-  console.log(allSurahRes);
-
   return (
     <div>
       <Head>
@@ -13,7 +11,7 @@ export default function Home({ allSurahRes }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="w-full h-11 bg-white-quran fixed">Search</div>
+      {/* <div className="w-full h-11 bg-white-quran fixed">Search</div> */}
       <div className="p-6 pt-16">
         <h2 className="text-center">Al-Quran</h2>
         <div className="grid grid-cols-auto-fit gap-3">

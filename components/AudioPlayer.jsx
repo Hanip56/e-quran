@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { IoPlayCircleOutline, IoPauseCircleOutline } from "react-icons/io5";
+import { useRouter } from "next/router";
 
 const AudioAyat = ({
   isPlaying,
@@ -8,16 +9,22 @@ const AudioAyat = ({
   currentSurahIndex,
   currentAyatSrc,
   jumlahAyat,
+  surahId,
 }) => {
   const audioRef = useRef(null);
+  const router = useRouter();
   let mounted = false;
 
-  console.log({ currentSurahIndex });
-  console.log({ jumlahAyat });
+  console.log(isPlaying);
 
   const togglePlay = () => {
     setIsPlaying((prev) => !prev);
   };
+
+  useEffect(() => {
+    setIsPlaying(false);
+    setCurrentSurahIndex(0);
+  }, [surahId]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -25,19 +32,21 @@ const AudioAyat = ({
       audioRef.current.autoplay = true;
     } else {
       audioRef.current.pause();
+      audioRef.current.autoplay = false;
     }
   }, [isPlaying]);
 
   useEffect(() => {
     audioRef.current.currentTime = 0;
 
-    const section = document.getElementById(currentSurahIndex.toString());
-    section.scrollIntoView({ behavior: "smooth", block: "center" });
-
-    if (currentSurahIndex === jumlahAyat) {
+    if (currentSurahIndex >= jumlahAyat) {
       setIsPlaying(false);
       setCurrentSurahIndex(0);
+      return;
     }
+
+    const section = document.getElementById(currentSurahIndex.toString());
+    section.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [currentSurahIndex]);
 
   useEffect(() => {

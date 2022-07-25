@@ -1,4 +1,3 @@
-import React from "react";
 import { IoHeartOutline } from "react-icons/io5";
 import AudioAyat from "./AudioAyat";
 
