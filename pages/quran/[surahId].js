@@ -19,7 +19,7 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
   return (
     <div>
       <Head>
-        <title>{data.nama_latin}</title>
+        <title>{data?.nama_latin}</title>
         <meta name="description" content="quran app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -32,7 +32,7 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
         >
           {data.ayat.map((ayat) => (
             <>
-              <option value={ayat.nomor - 1}>{ayat.nomor}</option>
+              <option value={ayat?.nomor - 1}>{ayat?.nomor}</option>
             </>
           ))}
         </select>
@@ -44,16 +44,16 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
             <div className="flex justify-around flex-col basis-[60%] w-56 overflow-y-hidden bg-white-quran rounded-md p-4">
               <div className="basis-[70%] flex flex-col gap-y-4 justify-center items-center">
                 <h2 className="text-center text-3xl font-bold">
-                  {allSurahRes[router.query.surahId].nama}
+                  {allSurahRes[router.query.surahId]?.nama}
                 </h2>
                 <p className="text-center">
-                  {allSurahRes[router.query.surahId].nama_latin}
+                  {allSurahRes[router.query.surahId]?.nama_latin}
                 </p>
               </div>
               <div className="h-full overflow-scroll space-y-2 scrollBarHideQ">
                 <h4 className="text-md font-bold">Deskripsi</h4>
                 <p className="text-sm">
-                  {allSurahRes[router.query.surahId].deskripsi.replace(
+                  {allSurahRes[router.query.surahId]?.deskripsi?.replace(
                     /<[^>]*>/g,
                     ""
                   )}
