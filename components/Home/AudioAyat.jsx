@@ -3,27 +3,27 @@ import { IoPlayCircleOutline, IoPauseCircleOutline } from "react-icons/io5";
 
 const AudioAyat = ({
   index,
-  currentSurahIndex,
+  currentAyahIndex,
   playing,
-  setCurrentSurahIndex,
+  setCurrentAyahIndex,
   setPlaying,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    if (currentSurahIndex === index && playing) {
+    if (currentAyahIndex === index && playing) {
       setIsPlaying(true);
     } else {
       setIsPlaying(false);
     }
-  }, [currentSurahIndex, index, playing]);
+  }, [currentAyahIndex, index, playing]);
 
   const playThisAyat = () => {
     if (isPlaying) {
       setPlaying(false);
       setIsPlaying(false);
     } else {
-      setCurrentSurahIndex(index);
+      setCurrentAyahIndex(index);
       setPlaying((prev) => true);
       setIsPlaying(true);
     }

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { IoBookSharp, IoHeart, IoPaperPlane } from "react-icons/io5";
 
@@ -8,9 +9,13 @@ const Sidebar = () => {
         Q
       </div>
       <ul className="p-1 flex flex-col gap-y-6 justify-center items-center w-full mt-4">
-        <li className="sidebarList active">
-          <IoBookSharp />
-        </li>
+        <Link href="/">
+          <a>
+            <li className="sidebarList active">
+              <IoBookSharp />
+            </li>
+          </a>
+        </Link>
         <li className="sidebarList">
           <IoHeart />
         </li>

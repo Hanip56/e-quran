@@ -4,16 +4,16 @@ import AudioAyat from "./AudioAyat";
 const SurahCard = ({
   ayat,
   index,
-  currentSurahIndex,
+  currentAyahIndex,
   playing,
-  setCurrentSurahIndex,
+  setCurrentAyahIndex,
   setIsPlaying,
 }) => {
   return (
     <div
       id={`${index}`}
       className={`flex flex-col gap-y-4 p-6 w-full rounded-[.205rem] bg-white-quran divide-y-2 ${
-        currentSurahIndex === index && "border border-light-green-quran"
+        currentAyahIndex === index && "border border-light-green-quran"
       }`}
     >
       <div className="flex flex-col gap-y-3">
@@ -26,7 +26,7 @@ const SurahCard = ({
           </div>
         </div>
         <div>
-          <span className="text-light-green-quran font-bold">English</span> -
+          <span className="text-light-green-quran font-bold">Indonesia</span> -
           Sahih
         </div>
         <div>{ayat.idn}</div>
@@ -36,9 +36,9 @@ const SurahCard = ({
           <IoHeartOutline />
           <AudioAyat
             index={index}
-            currentSurahIndex={currentSurahIndex}
+            currentAyahIndex={currentAyahIndex}
             playing={playing}
-            setCurrentSurahIndex={setCurrentSurahIndex}
+            setCurrentAyahIndex={setCurrentAyahIndex}
             setPlaying={setIsPlaying}
           />
         </div>

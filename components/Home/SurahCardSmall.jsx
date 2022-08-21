@@ -1,8 +1,17 @@
 import React from "react";
 
-const SurahCardSmall = ({ nama_latin, nomor, arti, surahIndex }) => {
+const SurahCardSmall = ({
+  nama_latin,
+  nomor,
+  arti,
+  surahIndex,
+  setCurrentSurahIndex,
+}) => {
   return (
-    <div className={`surahCardQ ${surahIndex == nomor && "active"}`}>
+    <div
+      className={`surahCardQ ${surahIndex == nomor && "active"} cursor-pointer`}
+      onClick={() => setCurrentSurahIndex(nomor)}
+    >
       <div className="flex justify-center items-start basis-10">
         <div className="w-4 h-4 text-xs mt-[.2rem] bg-green-quran text-white-quran rounded-full text-center">
           {nomor}

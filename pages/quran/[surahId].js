@@ -1,5 +1,6 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { IoChevronBack } from "react-icons/io5";
 import AyatCard from "../../components/Home/AyatCard";
 import AudioPlayer from "../../components/AudioPlayer";
 import Link from "next/link";
@@ -7,10 +8,19 @@ import SurahCardSmall from "../../components/Home/SurahCardSmall";
 import { useRouter } from "next/router";
 
 const DetailSurah = ({ allSurahRes, data, audio }) => {
-  const audioList = audio?.map((a) => a.audio);
-  const [currentSurahIndex, setCurrentSurahIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
   const router = useRouter();
+  const audioList = audio?.map((a) => a.audio);
+  const [currentAyahIndex, setCurrentAyahIndex] = useState(0);
+  const [currentSurahIndex, setCurrentSurahIndex] = useState(
+    +router.query.surahId - 1
+  );
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    if (currentSurahIndex !== +router.query.surahId - 1) {
+      router.push(`/quran/${currentSurahIndex}`);
+    }
+  }, [currentSurahIndex]);
 
   if (!data || !audio || !allSurahRes) {
     return <h1>Loading...</h1>;
@@ -24,18 +34,44 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex justify-between items-center w-[calc(100%-3rem)] px-6 h-14 bg-gray-quran fixed">
-        <p>Back</p>
-        <select
-          value={currentSurahIndex}
-          onChange={(e) => setCurrentSurahIndex(+e.target.value)}
-        >
-          {data.ayat.map((ayat) => (
-            <>
-              <option value={ayat?.nomor - 1}>{ayat?.nomor}</option>
-            </>
-          ))}
-        </select>
+      <div className="flex justify-between items-center w-[calc(100%-3rem)] px-6 h-14 z-40 bg-gray-quran fixed">
+        <Link href={"/"}>
+          <a className="flex gap-x-2 items-center hover:gap-x-1 transition-all duration-100">
+            <IoChevronBack />
+            <p>Back</p>
+          </a>
+        </Link>
+        <div className="flex gap-x-4 text-md">
+          <div className="flex gap-x-2">
+            <p>Ayah</p>
+            <select
+              value={currentAyahIndex}
+              onChange={(e) => setCurrentAyahIndex(+e.target.value)}
+            >
+              {data.ayat.map((ayat) => (
+                <>
+                  <option value={ayat?.nomor - 1}>{ayat?.nomor}</option>
+                </>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex gap-x-2">
+            <p>Surah </p>
+            <select
+              value={currentSurahIndex}
+              onChange={(e) => setCurrentSurahIndex(+e.target.value)}
+            >
+              {allSurahRes?.map((surah) => (
+                <>
+                  <option key={surah.nomor} value={surah.nomor}>
+                    {surah.nomor} | {surah.nama_latin}
+                  </option>
+                </>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
 
       <div className="flex flex-row gap-x-4 p-6 pt-16">
@@ -63,30 +99,29 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
             <div className="flex-1 flex flex-col w-56 h-full overflow-scroll space-y-2 scrollbar-hide">
               {allSurahRes?.map((surah) => (
                 <>
-                  <Link href={`/quran/${surah.nomor}`}>
-                    <a>
-                      <SurahCardSmall
-                        key={surah.nomor}
-                        nama_latin={surah.nama_latin}
-                        nomor={surah.nomor}
-                        arti={surah.arti}
-                        surahIndex={router.query.surahId}
-                      />
-                    </a>
-                  </Link>
+                  <SurahCardSmall
+                    key={surah.nomor}
+                    nama_latin={surah.nama_latin}
+                    nomor={surah.nomor}
+                    arti={surah.arti}
+                    surahIndex={router.query.surahId}
+                    setCurrentSurahIndex={setCurrentSurahIndex}
+                  />
                 </>
               ))}
             </div>
           </div>
         </div>
         <div className="flex-1">
-          <h2 className="text-center">AUdzubillahi minassyaithoni rajiim</h2>
+          <h2 className="text-center pb-6 text-xl">
+            أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ
+          </h2>
           <AudioPlayer
             isPlaying={isPlaying}
             setIsPlaying={setIsPlaying}
-            setCurrentSurahIndex={setCurrentSurahIndex}
-            currentSurahIndex={currentSurahIndex}
-            currentAyatSrc={audioList[currentSurahIndex]}
+            setCurrentAyahIndex={setCurrentAyahIndex}
+            currentAyahIndex={currentAyahIndex}
+            currentAyatSrc={audioList[currentAyahIndex]}
             audioList={audioList}
             jumlahAyat={audioList?.length}
             surahId={router.query.surahId}
@@ -98,8 +133,8 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
                 ayat={ayat}
                 playing={isPlaying}
                 index={i}
-                currentSurahIndex={currentSurahIndex}
-                setCurrentSurahIndex={setCurrentSurahIndex}
+                currentAyahIndex={currentAyahIndex}
+                setCurrentAyahIndex={setCurrentAyahIndex}
                 setIsPlaying={setIsPlaying}
               />
             ))}

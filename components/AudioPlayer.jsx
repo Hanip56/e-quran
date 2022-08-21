@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 const AudioAyat = ({
   isPlaying,
   setIsPlaying,
-  setCurrentSurahIndex,
-  currentSurahIndex,
+  setCurrentAyahIndex,
+  currentAyahIndex,
   currentAyatSrc,
   jumlahAyat,
   surahId,
@@ -23,7 +23,7 @@ const AudioAyat = ({
 
   useEffect(() => {
     setIsPlaying(false);
-    setCurrentSurahIndex(0);
+    setCurrentAyahIndex(0);
   }, [surahId]);
 
   useEffect(() => {
@@ -39,15 +39,15 @@ const AudioAyat = ({
   useEffect(() => {
     audioRef.current.currentTime = 0;
 
-    if (currentSurahIndex >= jumlahAyat) {
+    if (currentAyahIndex >= jumlahAyat) {
       setIsPlaying(false);
-      setCurrentSurahIndex(0);
+      setCurrentAyahIndex(0);
       return;
     }
 
-    const section = document.getElementById(currentSurahIndex.toString());
+    const section = document.getElementById(currentAyahIndex.toString());
     section.scrollIntoView({ behavior: "smooth", block: "center" });
-  }, [currentSurahIndex]);
+  }, [currentAyahIndex]);
 
   useEffect(() => {
     const handleRef = audioRef.current;
@@ -67,7 +67,7 @@ const AudioAyat = ({
   }, []);
 
   const handleNext = () => {
-    setCurrentSurahIndex((prev) => prev + 1);
+    setCurrentAyahIndex((prev) => prev + 1);
   };
 
   return (

@@ -1,8 +1,24 @@
 import Head from "next/head";
 import SurahCard from "../components/Home/SurahCard";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home({ allSurahRes }) {
+  const [keyword, setKeyword] = useState("");
+
+  let filteredSurah = allSurahRes;
+
+  if (keyword) {
+    const reg = new RegExp(
+      `.*${keyword.toLocaleLowerCase().replace("-", "").trim()}.*`,
+      "gi"
+    );
+
+    filteredSurah = filteredSurah.filter((surah) =>
+      surah.nama_latin.replace("-", "").toLowerCase().trim().match(reg)
+    );
+  }
+
   return (
     <div>
       <Head>
@@ -12,13 +28,22 @@ export default function Home({ allSurahRes }) {
       </Head>
 
       {/* <div className="w-full h-11 bg-white-quran fixed">Search</div> */}
-      <div className="p-6 pt-16">
-        <h2 className="text-center">Al-Quran</h2>
+      <div className="p-6">
+        <div className="w-full flex flex-col gap-y-2 items-center justify-center mb-4">
+          <h2 className="text-center font-bold">Al-Quran</h2>
+          <input
+            type="text"
+            placeholder="Search Surah..."
+            className="w-96 indent-2 p-1 bg-white/50 outline-none rounded-md"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
+        </div>
         <div className="grid grid-cols-auto-fit gap-3">
-          {allSurahRes?.map((surah) => (
+          {filteredSurah?.map((surah) => (
             <>
-              <Link href={`/quran/${surah.nomor}`}>
-                <a>
+              <Link href={`/quran/${surah.nomor}`} key={surah.nomor}>
+                <a key={surah.nomor}>
                   <SurahCard
                     key={surah.nomor}
                     nama={surah.nama}
