@@ -38,7 +38,7 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
   useEffect(() => {
     const section = document.getElementById(currentAyahIndex?.toString());
     section?.scrollIntoView({ behavior: "smooth", block: "center" });
-  }, [currentAyahIndex]);
+  }, [currentAyahIndex, preSetAyatIndex]);
 
   if (!data || !audio || !allSurahRes) {
     return <h1>Loading...</h1>;
@@ -180,8 +180,6 @@ export const getStaticProps = async (context) => {
       (res) => res.json()
     ),
   ]);
-
-  console.log(`Building slug: ${surahId}`);
 
   return {
     props: {

@@ -10,8 +10,6 @@ export const ContextProvider = ({ children }) => {
 
   const [initial, setInitial] = useState(true);
 
-  console.log({ bookmarkAyat });
-
   useEffect(() => {
     const bmstorage = localStorage.getItem("@equran_bookmarkayat");
     if (bmstorage) {
