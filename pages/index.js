@@ -27,7 +27,6 @@ export default function Home({ allSurahRes }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* <div className="w-full h-11 bg-white-quran fixed">Search</div> */}
       <div className="p-6">
         <div className="w-full flex flex-col gap-y-2 items-center justify-center mb-4">
           <h2 className="text-center font-bold">Al-Quran</h2>
@@ -41,21 +40,19 @@ export default function Home({ allSurahRes }) {
         </div>
         <div className="grid grid-cols-auto-fit gap-3">
           {filteredSurah?.map((surah) => (
-            <>
-              <Link href={`/quran/${surah.nomor}`} key={surah.nomor}>
-                <a key={surah.nomor}>
-                  <SurahCard
-                    key={surah.nomor}
-                    nama={surah.nama}
-                    nama_latin={surah.nama_latin}
-                    nomor={surah.nomor}
-                    tempat_turun={surah.tempat_turun}
-                    jumlah_ayat={surah.jumlah_ayat}
-                    arti={surah.arti}
-                  />
-                </a>
-              </Link>
-            </>
+            <Link href={`/quran/${surah.nomor}`} key={surah.nomor}>
+              <a key={surah.nomor}>
+                <SurahCard
+                  key={surah.nomor}
+                  nama={surah.nama}
+                  nama_latin={surah.nama_latin}
+                  nomor={surah.nomor}
+                  tempat_turun={surah.tempat_turun}
+                  jumlah_ayat={surah.jumlah_ayat}
+                  arti={surah.arti}
+                />
+              </a>
+            </Link>
           ))}
         </div>
       </div>

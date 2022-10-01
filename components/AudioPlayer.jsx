@@ -15,8 +15,6 @@ const AudioAyat = ({
   const router = useRouter();
   let mounted = false;
 
-  console.log(isPlaying);
-
   const togglePlay = () => {
     setIsPlaying((prev) => !prev);
   };

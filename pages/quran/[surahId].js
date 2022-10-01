@@ -12,15 +12,16 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
   const audioList = audio?.map((a) => a.audio);
   const [currentAyahIndex, setCurrentAyahIndex] = useState(0);
   const [currentSurahIndex, setCurrentSurahIndex] = useState(
-    +router.query.surahId - 1
+    +router.query.surahId
   );
+
   const [isPlaying, setIsPlaying] = useState(false);
 
-  useEffect(() => {
-    if (currentSurahIndex !== +router.query.surahId - 1) {
-      router.push(`/quran/${currentSurahIndex}`);
-    }
-  }, [currentSurahIndex]);
+  // useEffect(() => {
+  //   if (currentSurahIndex !== +router.query.surahId - 1) {
+  //     router.push(`/quran/${currentSurahIndex}`);
+  //   }
+  // }, [currentSurahIndex]);
 
   if (!data || !audio || !allSurahRes) {
     return <h1>Loading...</h1>;
@@ -50,7 +51,9 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
             >
               {data.ayat.map((ayat) => (
                 <>
-                  <option value={ayat?.nomor - 1}>{ayat?.nomor}</option>
+                  <option value={ayat?.nomor - 1} key={ayat?.nomor}>
+                    {ayat?.nomor}
+                  </option>
                 </>
               ))}
             </select>
