@@ -23,6 +23,7 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
     if (preSetAyatIndex) {
       setCurrentAyahIndex(preSetAyatIndex);
     }
+
     return () => {
       setPreSetAyatIndex(null);
     };
@@ -34,11 +35,14 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
     }
   }, [currentSurahIndex]);
 
+  useEffect(() => {
+    const section = document.getElementById(currentAyahIndex?.toString());
+    section?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [currentAyahIndex]);
+
   if (!data || !audio || !allSurahRes) {
     return <h1>Loading...</h1>;
   }
-
-  console.log({ currentAyahIndex });
 
   return (
     <div>

@@ -42,9 +42,6 @@ const AudioAyat = ({
       setCurrentAyahIndex(0);
       return;
     }
-
-    const section = document.getElementById(currentAyahIndex.toString());
-    section.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [currentAyahIndex]);
 
   useEffect(() => {
