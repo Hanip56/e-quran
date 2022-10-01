@@ -21,7 +21,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         "auto-fit": "repeat(auto-fit, minmax(14rem, 1fr))",
-        "auto-fill": "repeat(auto-fill, minmax(11rem, 11rem))",
+        "auto-fill": "repeat(auto-fill, minmax(12rem, 1fr))",
         newsGrid: "repeat(auto-fill, minmax(50%, 1fr))",
       },
       backgroundImage: {

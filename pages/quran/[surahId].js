@@ -6,8 +6,10 @@ import AudioPlayer from "../../components/AudioPlayer";
 import Link from "next/link";
 import SurahCardSmall from "../../components/Home/SurahCardSmall";
 import { useRouter } from "next/router";
+import { useStateContext } from "../../contexts/ContextProvider";
 
 const DetailSurah = ({ allSurahRes, data, audio }) => {
+  const { preSetAyatIndex, setPreSetAyatIndex } = useStateContext();
   const router = useRouter();
   const audioList = audio?.map((a) => a.audio);
   const [currentAyahIndex, setCurrentAyahIndex] = useState(0);
@@ -17,15 +19,26 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // useEffect(() => {
-  //   if (currentSurahIndex !== +router.query.surahId - 1) {
-  //     router.push(`/quran/${currentSurahIndex}`);
-  //   }
-  // }, [currentSurahIndex]);
+  useEffect(() => {
+    if (preSetAyatIndex) {
+      setCurrentAyahIndex(preSetAyatIndex);
+    }
+    return () => {
+      setPreSetAyatIndex(null);
+    };
+  }, [preSetAyatIndex]);
+
+  useEffect(() => {
+    if (currentSurahIndex !== +router.query.surahId - 1) {
+      router.push(`/quran/${currentSurahIndex}`);
+    }
+  }, [currentSurahIndex]);
 
   if (!data || !audio || !allSurahRes) {
     return <h1>Loading...</h1>;
   }
+
+  console.log({ currentAyahIndex });
 
   return (
     <div>
@@ -139,6 +152,9 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
                 currentAyahIndex={currentAyahIndex}
                 setCurrentAyahIndex={setCurrentAyahIndex}
                 setIsPlaying={setIsPlaying}
+                namaSurahLatin={
+                  allSurahRes[+router.query.surahId - 1]?.nama_latin
+                }
               />
             ))}
           </div>
