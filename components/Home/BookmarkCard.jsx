@@ -12,7 +12,14 @@ const BookmarkCard = ({ surahAndAyat }) => {
 
   const handleGo = () => {
     setPreSetAyatIndex(+ayat - 1);
-    router.push(`/quran/${surahNomor}`, undefined, { scroll: false });
+
+    router.push(
+      {
+        pathname: `/quran/${surahNomor}`,
+      },
+      undefined,
+      { scroll: false, shallow: true }
+    );
   };
 
   return (

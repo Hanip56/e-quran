@@ -20,20 +20,6 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    let scrollTimeOut;
-    if (preSetAyatIndex) {
-      scrollTimeOut = setTimeout(() => {
-        const section = document.getElementById(preSetAyatIndex?.toString());
-        section?.scrollIntoView({ behavior: "smooth", block: "center" });
-      }, 0);
-    }
-
-    return () => {
-      clearTimeout(scrollTimeOut);
-    };
-  }, []);
-
-  useEffect(() => {
     if (preSetAyatIndex) {
       setCurrentAyahIndex(preSetAyatIndex);
     }
@@ -50,8 +36,10 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
   }, [currentSurahIndex]);
 
   useEffect(() => {
-    const section = document.getElementById(currentAyahIndex?.toString());
-    section?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => {
+      const section = document.getElementById(currentAyahIndex?.toString());
+      section?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
   }, [currentAyahIndex, preSetAyatIndex]);
 
   if (!data || !audio || !allSurahRes) {
