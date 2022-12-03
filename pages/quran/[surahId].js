@@ -20,6 +20,20 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
+    let scrollTimeOut;
+    if (preSetAyatIndex) {
+      scrollTimeOut = setTimeout(() => {
+        const section = document.getElementById(preSetAyatIndex?.toString());
+        section?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 0);
+    }
+
+    return () => {
+      clearTimeout(scrollTimeOut);
+    };
+  }, []);
+
+  useEffect(() => {
     if (preSetAyatIndex) {
       setCurrentAyahIndex(preSetAyatIndex);
     }
