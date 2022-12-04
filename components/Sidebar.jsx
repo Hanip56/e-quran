@@ -9,9 +9,10 @@ const Sidebar = () => {
   const router = useRouter();
 
   return (
-    <nav className="fixed flex flow-row md:block justify-between w-full z-10 h-10 md:w-12 bg-white-quran md:h-screen top-0 left-0">
-      <div className="w-10 h-full md:w-full bg-green-quran md:h-12 flex justify-center items-center text-white-quran">
-        Q
+    <nav className="fixed flex flow-row md:block justify-between w-full z-10 h-12 md:w-12 md:h-screen top-0 left-0 bg-green-quran md:bg-white-quran">
+      <div className="h-full md:w-full bg-green-quran md:h-12 flex justify-center items-center text-white-quran ml-4 md:ml-0">
+        <p className="hidden md:block font-bold">Q</p>
+        <p className="block md:hidden font-bold">E-Quran</p>
       </div>
       <ul className="p-1 hidden md:flex flex-col gap-y-6 justify-center items-center w-full mt-4">
         <Link href="/">
@@ -38,7 +39,7 @@ const Sidebar = () => {
           className="bg-green-quran/80 p-2 rounded-sm text-white"
           onClick={() => setShowMobileMenu((prev) => !prev)}
         >
-          <HiOutlineMenuAlt3 />
+          <HiOutlineMenuAlt3 size={24} />
         </button>
       </div>
       {/* mobile menu */}

@@ -27,6 +27,9 @@ module.exports = {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--gradient-color-stops))",
       },
+      screens: {
+        xs: "375px",
+      },
     },
   },
   plugins: [require("tailwind-scrollbar-hide")],

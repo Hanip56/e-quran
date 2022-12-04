@@ -63,7 +63,7 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
             <p className="hidden md:block">Back</p>
           </a>
         </Link>
-        <div className="flex gap-x-4 text-sm md:text-base">
+        <div className="flex gap-x-2 md:gap-x-4 text-xs xs:text-sm md:text-base">
           <div className="flex gap-x-2">
             <p>Ayah</p>
             <select
@@ -80,7 +80,7 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
             </select>
           </div>
 
-          <div className="flex gap-x-2">
+          <div className="flex gap-x-0.5 md:gap-x-2">
             <p>Surah </p>
             <select
               value={currentSurahIndex}
@@ -98,7 +98,7 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
         </div>
       </div>
 
-      <div className="flex flex-row gap-x-4 p-6 pt-16">
+      <div className="flex flex-row gap-x-4 p-6 pt-8 md:pt-20">
         <div className="hidden md:flex basis-56 w-full relative pb-10 justify-between ">
           <div className="fixed flex flex-col gap-y-4 h-[90vh] w-56 ">
             <div className="flex justify-around flex-col basis-[60%] w-56 overflow-y-hidden bg-white-quran rounded-md p-4">
