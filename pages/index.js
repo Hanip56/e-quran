@@ -2,6 +2,7 @@ import Head from "next/head";
 import SurahCard from "../components/Home/SurahCard";
 import Link from "next/link";
 import { useState } from "react";
+import Sidebar from "../components/Sidebar";
 
 export default function Home({ allSurahRes }) {
   const [keyword, setKeyword] = useState("");
@@ -33,7 +34,7 @@ export default function Home({ allSurahRes }) {
           <input
             type="text"
             placeholder="Search Surah..."
-            className="w-96 indent-2 p-1 bg-white/50 outline-none rounded-md"
+            className="w-full md:w-96 indent-2 p-1 bg-white/50 outline-none rounded-md"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
           />

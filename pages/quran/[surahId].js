@@ -37,8 +37,10 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      const section = document.getElementById(currentAyahIndex?.toString());
-      section?.scrollIntoView({ behavior: "smooth", block: "center" });
+      const section =
+        document.getElementById(currentAyahIndex?.toString()).offsetTop - 58;
+      // section?.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.scroll({ top: section, behavior: "smooth" });
     }, 100);
   }, [currentAyahIndex, preSetAyatIndex]);
 
@@ -54,14 +56,14 @@ const DetailSurah = ({ allSurahRes, data, audio }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex justify-between items-center w-[calc(100%-3rem)] px-6 h-14 z-40 bg-gray-quran fixed">
+      <div className="flex justify-between items-center w-[calc(100%-.2rem)] md:w-[calc(100%-3rem)] px-6 h-14 bg-gray-quran fixed top-0 z-20">
         <Link href={"/"}>
-          <a className="flex gap-x-2 items-center hover:gap-x-1 transition-all duration-100">
-            <IoChevronBack />
-            <p>Back</p>
+          <a className="flex gap-x-2 items-center hover:gap-x-1 transition-all duration-100 text-green-quran p-2">
+            <IoChevronBack size={24} />
+            <p className="hidden md:block">Back</p>
           </a>
         </Link>
-        <div className="flex gap-x-4 text-md">
+        <div className="flex gap-x-4 text-sm md:text-base">
           <div className="flex gap-x-2">
             <p>Ayah</p>
             <select
